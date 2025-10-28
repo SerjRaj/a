@@ -1,0 +1,147 @@
+Menú Puntos
+--------o---------o-------o---------o-------
+1. Click derecho en app -> New -> Android Resource Directory -> menu
+
+2. Crear un Menu Resource File llamado 'mainmenu'
+
+3. Ir a AndroidManifest.xml y buscar el activity de MainActivity y colocar la siguiente línea:
+
+		android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+
+4. En el MainActivity de Java, dejar solo:
+
+			1. onCreateOptionsMenu
+			2. onOptionsItemSelected
+
+5. Dentro del mainmenu.xml declarar los items con:
+
+		<item
+			android:id="@+id/[Nombrex]"
+			android:title="[Nombrex]"
+			android:icon="@drawable/EscojeItem"
+			app:showAsAction="always"/>
+
+6. Dentro del onCreateOptionsMenu colocar:
+
+			getMenuInflater().inflate(R.menu.mainmenu, menu);
+			return true;
+
+7. En el onOptionsItemSelected colocar:
+
+			if(item.getItemId() == R.id.[nombreitem]){
+			
+			}
+
+--------o---------o-------o---------o-------
+
+Fragmentos Estáticos
+
+--------o---------o-------o---------o-------
+
+1. Dentro del activitymain.xml crea un FrameLayout con:
+
+				android:id"@id/container"
+
+2. Crea un LinearLayout abajo con los botones necesarios
+
+3. Crea los Fragmentos Necesarios
+
+4.Dentro de MainActivity declarar lo siguiente:
+
+			FragmentTransaction transaction;
+			[NombreFragmento] o[NombreFragmento];
+			EditText ---;
+
+Dentro del onCreate:
+
+
+			o[nombrefrag] = new [nombrefrag]();
+			getSupportFragmentManager().beginTransaction().add(R.id.container.oinicio).commit();
+
+Dentro del onClick:
+
+			String cadenita = ((Button)v).getText().toString();
+
+			transaction = getSupportFragmentManager().beginTransaction();
+
+			if(cadenita.equals("-----"){
+				transaction.replace(R.id.container, o[nombrex];
+			}
+
+5. Dentro de los fragmentos, deje el onViewCreated y Crear un Override:
+
+			onCreateView donde irá:
+
+			View vistita;
+			vistita = inflater.inflate(R.layout.fragment_[nombre], container, false);
+			dato = vistita.findViewById(R.id.dato[xml]);
+			boton = vistita.findViewById(R.id.boton[xml]);
+			oinicio = new Inicio();
+			return vistita;
+
+6. Si en el onClick hay cálculos:
+
+		clasesita objetito = new clasesita();
+		objetito.setDato(Integer.parseInt(datoxml.getText().toString();
+
+
+--------o---------o-------o---------o-------
+
+
+Fragmentos Dinámicos
+
+--------o---------o-------o---------o-------
+
+
+1. En el activitymain.xml colocar un FragmentContainerView, que debería verse así:
+
+		<androidx.fragment.app.FragmentContainerView
+    			xmlns:android="http://schemas.android.com/apk/res/android"
+    			xmlns:app="http://schemas.android.com/apk/res-auto"
+    			android:id="@+id/nav_host_fragment"
+    			android:name="androidx.navigation.fragment.NavHostFragment"
+    			android:layout_width="match_parent"
+    			android:layout_height="match_parent"
+    			app:defaultNavHost="true"
+    			app:navGraph="@navigation/navegador" />
+
+2. Click derecho a app -> New -> Android Resource Directory -> navigation -> y después declarar el Android Resource File para colocar
+el nombre de 'navegador'
+
+3. En el navegador, ubicarse en la Paleta y darle Add Destination al Inicio. Debe verse así:
+
+ <fragment
+        android:id="@+id/inicio"
+        android:name="com.example.navegadordtc.Inicio"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio">
+        <action
+            android:id="@+id/action_inicio_to_doble"
+            app:destination="@+id/doble" />
+    </fragment>
+
+PONER OTRO ACTION SI VA A EXISTIR OTRO BOTÓN.
+
+
+4.
+		
+		EditTexts
+		
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button sig = view.findViewById(R.id.siguiente);
+        sig.setOnClickListener(this);
+
+        Button regresa = view.findViewById(R.id.regresar);
+        regresa.setOnClickListener(this);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_doble, container, false);
+
+
