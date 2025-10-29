@@ -1,0 +1,44 @@
+
+activitymain.xml
+
+		<FrameLayout
+        		android:id="@+id/container"
+        		android:layout_width="match_parent"
+        		android:layout_height="500dp"/>
+
+		<LinearLayout
+        		android:layout_width="match_parent"
+        		android:layout_height="187dp"
+        		android:orientation="vertical"
+
+
+MainActivity.java
+
+
+		FragmentTransaction transaction;
+		Inicio onicio;
+    		Suma osuma;
+
+
+onCreate
+
+	onicio = new Inicio();
+        osuma = new Suma();
+	getSupportFragmentManager().beginTransaction().add(R.id.container, onicio).commit();
+
+
+onClick
+		String cadenita = ((Button)v).getText().toString();
+        	transaction = getSupportFragmentManager().beginTransaction();
+
+        		if(cadenita.equals("+")){
+            			transaction.replace(R.id.container, osuma).commit();
+        			}
+
+Dentro de los fragmentos Estáticos dejar el OnCreateView:
+
+		View vistita;
+		vistita = inflater.inflate(R.layout.fragment_[nombre], container, false);
+		XXXX = vistita.findViewById(R.id.xxxxx);
+		oinicio = new Inicio();
+		return vistita;

@@ -1,0 +1,31 @@
+--------o---------o-------o---------o-------
+
+1. Menú Puntitos:
+
+--------o---------o-------o---------o-------
+
+AndroidManifest (.MainActivity):
+
+		android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+
+MainActivity.java
+		1. onCreateOptionsMenu
+		2. onOptionsItemSelected
+mainmenu.xml -> Menu ARD
+
+		<item
+			android:id="@+id/[Nombrex]"
+			android:title="[Nombrex]"
+			android:icon="@drawable/EscojeItem"
+			app:showAsAction="always"/>
+
+	onCreateOptionsMenu colocar:
+
+			getMenuInflater().inflate(R.menu.mainmenu, menu);
+			return true;
+
+	onOptionsItemSelected colocar:
+
+			if(item.getItemId() == R.id.[nombreitem]){
+			
+			}

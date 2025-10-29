@@ -1,0 +1,121 @@
+
+1. Declarar un ListView en el activitymain.xml y ponerle id vistita:
+
+	<ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/vistita"/>
+
+2. En el layout, crear un archivo 'basurita.xml':
+
+		    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageicon"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview2"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+3. Crear una clase java llamada 'Adaptador' (esta debe incluir un :
+
+    Context context;
+    String lista1[];
+    String lista2[];
+    int listaimagenes[];
+    LayoutInflater inflater;
+
+
+    public Adaptador(Context context, String[] lista1, String[] lista2, int[] listaimagenes) {
+        this.context = context;
+        this.lista1 = lista1;
+        this.lista2 = lista2;
+        this.listaimagenes = listaimagenes;
+        this.inflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public int getCount() {
+
+        return (lista2 != null) ? lista2.length : 0;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return lista1[position];
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.basurita, parent, false);
+        }
+
+        TextView textview = convertView.findViewById(R.id.textview);
+        TextView textview2 = convertView.findViewById(R.id.textview2);
+        ImageView img = convertView.findViewById(R.id.imageicon);
+
+        textview.setText(lista1[position]);
+        textview2.setText(lista2[position]);
+        deporteimg.setImageResource(listaimagenes[position]);
+
+        return convertView;
+    }
+
+4. En el MainActivity declarar lo siguiente:
+
+    String arreglo1[] = {"uno", "dos", "tres","cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez"};
+    String arreglo2[] = {"carreras", "carreras2", "correr", "cuerda", "dep", "depo1", "depo2", "fucho", "fucho2", "gim"};
+    int imagenes[] = {R.drawable.op, R.drawable.op2, R.drawable.op3, R.drawable.op13, R.drawable.op5, R.drawable.op6, R.drawable.op7, R.drawable.op8, R.drawable.op12, R.drawable.op10};
+    ListView listview;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+
+        setContentView(R.layout.activity_main);
+
+        listview = findViewById(R.id.vistitas);
+
+
+        listview.setOnItemClickListener(this);
+
+
+        Adaptador adaptador = new Adaptador(getApplicationContext(), arreglo1, arreglo2, imagenes);
+        listview.setAdapter(adaptador);
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) { //Toast.makeText(this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+        
+    }		

@@ -1,0 +1,48 @@
+En el navegador:
+
+	android:id="@+id/navegador"
+    	app:startDestination="@id/inicio">
+
+    <fragment
+        android:id="@+id/inicio"
+        android:name="com.example.navegadordtc.Inicio"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio">
+        <action
+            android:id="@+id/action_inicio_to_xxxx"
+            app:destination="@+id/xxxx" />
+    </fragment>
+
+
+En el activitymain.xml:
+
+<androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:navGraph="@navigation/navegador"
+        app:defaultNavHost="true" />
+
+
+En los fragmentos poner un: 
+		
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+	super.onViewCreated(view, savedInstanceState);
+
+        Button XXXX = view.findViewById(R.id.XXXX);
+        XXXX.setOnClickListener(this);
+	}
+
+
+En el OnClick:
+
+
+ @Override
+    public void onClick(View v) {
+        String cadenita = ((Button)v).getText().toString();
+
+        if (cadenita.equals("Regresa")){
+            Navigation.findNavController(v).navigate(R.id.doble);
+        }
