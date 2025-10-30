@@ -42,30 +42,29 @@
 
 3. Crear una clase java llamada 'Adaptador' (esta debe incluir un :
 
-    Context context;
-    String lista1[];
-    String lista2[];
-    int listaimagenes[];
+   
+    Context contexto;
+    String[] arreglo1;
+    String[] arreglo2;
+    int[] imagenes;
     LayoutInflater inflater;
 
-
-    public Adaptador(Context context, String[] lista1, String[] lista2, int[] listaimagenes) {
-        this.context = context;
-        this.lista1 = lista1;
-        this.lista2 = lista2;
-        this.listaimagenes = listaimagenes;
-        this.inflater = LayoutInflater.from(context);
+    public Adaptador(Context contexto, String[] arreglo1, String[] arreglo2, int[] imagenes) {
+        this.contexto = contexto;
+        this.arreglo1 = arreglo1;
+        this.arreglo2 = arreglo2;
+        this.imagenes = imagenes;
+        this.inflater = LayoutInflater.from(contexto);
     }
 
     @Override
     public int getCount() {
-
-        return (lista2 != null) ? lista2.length : 0;
+        return arreglo1.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return lista1[position];
+        return arreglo1[position];
     }
 
     @Override
@@ -74,20 +73,32 @@
     }
 
     @Override
+    public int getViewTypeCount() {
+        return 1;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return 0;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.basurita, parent, false);
+
+        View v = convertView;
+        if (v == null) {
+            v = inflater.inflate(R.layout.basurita, parent, false);
         }
 
-        TextView textview = convertView.findViewById(R.id.textview);
-        TextView textview2 = convertView.findViewById(R.id.textview2);
-        ImageView img = convertView.findViewById(R.id.imageicon);
+        TextView t1 = v.findViewById(R.id.textview);
+        TextView t2 = v.findViewById(R.id.textview2);
+        ImageView iv = v.findViewById(R.id.imageicon);
 
-        textview.setText(lista1[position]);
-        textview2.setText(lista2[position]);
-        deporteimg.setImageResource(listaimagenes[position]);
+        t1.setText(arreglo1[position]);
+        t2.setText(arreglo2[position]);
+        iv.setImageResource(imagenes[position]);
 
-        return convertView;
+        return v;
     }
 
 4. En el MainActivity declarar lo siguiente:
@@ -119,3 +130,10 @@
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) { //Toast.makeText(this, String.valueOf(position), Toast.LENGTH_SHORT).show();
         
     }		
+
+
+Intent intento = new Intent(MainActivity.this, XXXXXX.class);
+            startActivity(intento);
+
+
+
