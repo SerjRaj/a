@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navegador" app:startDestination="@id/inicio">
+
+    <fragment
+        android:id="@+id/inicio"
+        android:name="com.example.exam.Inicio"
+        android:label="fragment_inicio"
+        >
+        <action
+            android:id="@+id/action_inicio_to_fragmento1"
+            app:destination="@id/fragmento1"/>
+        <action
+            android:id="@+id/action_inicio_to_fragmento2"
+            app:destination="@id/fragmento2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmento1"
+        android:name="com.example.exam.Fragmento1"
+        android:label="fragment_fragmento1">
+        <action
+            android:id="@+id/action_fragmento1_to_fragmento2"
+            app:destination="@id/fragmento2"/>
+        <action
+            android:id="@+id/action_fragmento1_to_fragmento22"
+            app:destination="@id/fragmento2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmento2"
+        android:name="com.example.exam.Fragmento2"
+        android:label="fragment_fragmento2"/>
+
+</navigation>
